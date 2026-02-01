@@ -323,18 +323,6 @@ const AnalyticsPage = () => {
             <p className="text-xs text-muted-foreground mt-1">Female representation</p>
           </div>
           <div className="p-4 bg-secondary/50 rounded-lg">
-            <p className="text-sm text-muted-foreground">स्नातक वा माथि</p>
-            <p className="text-2xl font-bold text-foreground mt-1">
-              {(
-                ((stats.byQualification["स्नातक"] || 0) + 
-                 (stats.byQualification["स्नातकोत्तर"] || 0) + 
-                 (stats.byQualification["विद्यावारिधि"] || 0)) / 
-                stats.totalCandidates * 100
-              ).toFixed(1)}%
-            </p>
-            <p className="text-xs text-muted-foreground mt-1">Bachelor's degree or above</p>
-          </div>
-          <div className="p-4 bg-secondary/50 rounded-lg">
             <p className="text-sm text-muted-foreground">औसत उमेर</p>
             <p className="text-2xl font-bold text-foreground mt-1">
               {Math.round(allCandidates.reduce((a, c) => a + c.AGE_YR, 0) / allCandidates.length)} वर्ष
