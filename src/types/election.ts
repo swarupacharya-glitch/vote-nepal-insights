@@ -15,6 +15,18 @@ export interface Candidate {
   ADDRESS?: string;
   FatherName?: string;
   SpouseName?: string;
+  SYMBOLCODE?: number;
+  CTZDIST?: string;
+  STATE_ID?: number;
+  SCConstID?: number;
+  ConstName?: number;
+  TotalVoteReceived?: number;
+  R?: number;
+  FATHER_NAME?: string;
+  SPOUCE_NAME?: string;
+  OTHERDETAILS?: string;
+  E_STATUS?: string;
+  DOB?: number;
 }
 
 export interface FilterState {
@@ -23,6 +35,7 @@ export interface FilterState {
   party: string | null;
   qualification: string | null;
   gender: string | null;
+  constituency: number | null;
   ageMin: number | null;
   ageMax: number | null;
 }

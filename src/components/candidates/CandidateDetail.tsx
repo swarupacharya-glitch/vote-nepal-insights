@@ -98,8 +98,8 @@ export function CandidateDetail({
         <DialogHeader className="text-left">
           <div className="flex items-start gap-4">
             {/* Large Avatar */}
-            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-secondary shrink-0">
-              <User className="h-8 w-8 text-muted-foreground" />
+            <div className="flex h-24 w-24 items-center justify-center rounded-full bg-secondary shrink-0">
+              <img src={`https://result.election.gov.np/Images/Candidate/${candidate.CandidateID}.jpg`} className="w-100 h-100 object-cover" alt="candidate picture of face"/>
             </div>
             <div className="min-w-0">
               <DialogTitle className="text-xl font-bold font-nepali leading-tight">

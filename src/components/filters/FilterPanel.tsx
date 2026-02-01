@@ -10,6 +10,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { cn } from "@/lib/utils";
+import { Combobox } from "@/components/ui/combobox";
+import { DISTRICT_MAP_EN_NP, PARTY_MAP_EN_NP, PROVINCE_MAP_EN_NP } from "@/data/mappings";
 
 interface FilterPanelProps {
   filters: FilterState;
@@ -17,6 +19,7 @@ interface FilterPanelProps {
   options: {
     provinces: string[];
     districts: string[];
+    constituencies: number[];
     parties: string[];
     qualifications: string[];
     genders: string[];
@@ -38,6 +41,7 @@ export function FilterPanel({
     onFilterChange({
       province: null,
       district: null,
+      constituency: null,
       party: null,
       qualification: null,
       gender: null,
@@ -52,6 +56,31 @@ export function FilterPanel({
       [key]: value === "all" ? null : value,
     });
   };
+
+  // Helper to reverse map for search keywords
+  const getKeywords = (value: string, map: Record<string, string>) => {
+    return Object.entries(map)
+      .filter(([_, v]) => v === value)
+      .map(([k]) => k);
+  };
+
+  const provinceOptions = options.provinces.map(p => ({ 
+    label: p, 
+    value: p,
+    keywords: getKeywords(p, PROVINCE_MAP_EN_NP)
+  }));
+  
+  const districtOptions = options.districts.map(d => ({ 
+    label: d, 
+    value: d,
+    keywords: getKeywords(d, DISTRICT_MAP_EN_NP)
+  }));
+  
+  const partyOptions = options.parties.map(p => ({ 
+    label: p, 
+    value: p,
+    keywords: getKeywords(p, PARTY_MAP_EN_NP)
+  }));
 
   return (
     <div className={cn("space-y-4", className)}>
@@ -80,58 +109,52 @@ export function FilterPanel({
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3">
         {/* Province Filter */}
-        <Select
-          value={filters.province || "all"}
-          onValueChange={(v) => updateFilter("province", v)}
-        >
-          <SelectTrigger className="bg-card">
-            <SelectValue placeholder="प्रदेश (Province)" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">सबै प्रदेश</SelectItem>
-            {options.provinces.map((province) => (
-              <SelectItem key={province} value={province}>
-                {province}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        <Combobox
+          options={provinceOptions}
+          value={filters.province}
+          onSelect={(v) => updateFilter("province", v)}
+          placeholder="प्रदेश (Province)"
+          searchPlaceholder="Search province..."
+          emptyText="No province found."
+        />
 
         {/* District Filter */}
+        <Combobox
+          options={districtOptions}
+          value={filters.district}
+          onSelect={(v) => updateFilter("district", v)}
+          placeholder="जिल्ला (District)"
+          searchPlaceholder="Search district..."
+          emptyText="No district found."
+        />
+
+        {/* Constituency Filter */}
         <Select
-          value={filters.district || "all"}
-          onValueChange={(v) => updateFilter("district", v)}
+          value={filters.constituency?.toString() || "all"}
+          onValueChange={(v) => updateFilter("constituency", v === "all" ? "all" : parseInt(v))}
         >
           <SelectTrigger className="bg-card">
-            <SelectValue placeholder="जिल्ला (District)" />
+            <SelectValue placeholder="क्षेत्र (Area)" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">सबै जिल्ला</SelectItem>
-            {options.districts.map((district) => (
-              <SelectItem key={district} value={district}>
-                {district}
+            <SelectItem value="all">सबै क्षेत्र</SelectItem>
+            {options.constituencies.map((constituency) => (
+              <SelectItem key={constituency} value={constituency.toString()}>
+                Area {constituency}
               </SelectItem>
             ))}
           </SelectContent>
         </Select>
 
         {/* Party Filter */}
-        <Select
-          value={filters.party || "all"}
-          onValueChange={(v) => updateFilter("party", v)}
-        >
-          <SelectTrigger className="bg-card">
-            <SelectValue placeholder="पार्टी (Party)" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">सबै पार्टी</SelectItem>
-            {options.parties.map((party) => (
-              <SelectItem key={party} value={party}>
-                {party}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        <Combobox
+          options={partyOptions}
+          value={filters.party}
+          onSelect={(v) => updateFilter("party", v)}
+          placeholder="पार्टी (Party)"
+          searchPlaceholder="Search party..."
+          emptyText="No party found."
+        />
 
         {/* Qualification Filter */}
         <Select

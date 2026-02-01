@@ -12,6 +12,7 @@ import { Candidate, FilterState } from "@/types/election";
 import { Input } from "@/components/ui/input";
 import { Search, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { DISTRICT_MAP_EN_NP, PARTY_MAP_EN_NP } from "@/data/mappings";
 
 const ITEMS_PER_PAGE = 24;
 
@@ -21,6 +22,7 @@ const CandidatesPage = () => {
     district: null,
     party: null,
     qualification: null,
+    constituency: null,
     gender: null,
     ageMin: null,
     ageMax: null,
@@ -31,19 +33,39 @@ const CandidatesPage = () => {
   const [selectedCandidate, setSelectedCandidate] = useState<Candidate | null>(null);
   const [detailOpen, setDetailOpen] = useState(false);
 
-  const filterOptions = useFilterOptions(allCandidates);
+  const filterOptions = useFilterOptions(allCandidates, filters);
   const filteredByFilters = useFilteredCandidates(allCandidates, filters);
+
+
 
   // Apply search filter
   const filteredCandidates = useMemo(() => {
     if (!searchQuery.trim()) return filteredByFilters;
     
     const query = searchQuery.toLowerCase();
+    const searchTerms = [query];
+
+    // Add mapped Nepali terms if English query matches
+    // We check if the query matches potential English keys
+    Object.keys(DISTRICT_MAP_EN_NP).forEach(enKey => {
+      if (enKey.includes(query)) {
+        searchTerms.push(DISTRICT_MAP_EN_NP[enKey]);
+      }
+    });
+
+    Object.keys(PARTY_MAP_EN_NP).forEach(enKey => {
+      if (enKey.includes(query)) {
+        searchTerms.push(PARTY_MAP_EN_NP[enKey]);
+      }
+    });
+
     return filteredByFilters.filter(
       (c) =>
-        c.CandidateName.toLowerCase().includes(query) ||
-        c.DistrictName.toLowerCase().includes(query) ||
-        c.PoliticalPartyName.toLowerCase().includes(query)
+        searchTerms.some(term => 
+          c.CandidateName.toLowerCase().includes(term) ||
+          c.DistrictName.toLowerCase().includes(term) ||
+          c.PoliticalPartyName.toLowerCase().includes(term)
+        )
     );
   }, [filteredByFilters, searchQuery]);
 

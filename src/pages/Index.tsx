@@ -25,6 +25,7 @@ const Index = () => {
     district: null,
     party: null,
     qualification: null,
+    constituency: null,
     gender: null,
     ageMin: null,
     ageMax: null,
@@ -33,7 +34,7 @@ const Index = () => {
   const [selectedCandidate, setSelectedCandidate] = useState<Candidate | null>(null);
   const [detailOpen, setDetailOpen] = useState(false);
 
-  const filterOptions = useFilterOptions(allCandidates);
+  const filterOptions = useFilterOptions(allCandidates, filters);
   const filteredCandidates = useFilteredCandidates(allCandidates, filters);
   const stats = useAggregatedStats(filteredCandidates);
 

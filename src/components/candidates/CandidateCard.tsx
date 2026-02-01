@@ -10,10 +10,10 @@ interface CandidateCardProps {
 }
 
 const partyColorMap: Record<string, string> = {
-  "नेपाली काँग्रेस": "bg-blue-100 text-blue-800 border-blue-200",
+  "नेपाली काँग्रेस": "bg-green-100 text-green-800 border-green-200",
   "नेपाल कम्युनिष्ट पार्टी (एकीकृत मार्क्सवादी लेनिनवादी)": "bg-red-100 text-red-800 border-red-200",
   "नेपाल कम्युनिष्ट पार्टी (माओवादी केन्द्र)": "bg-rose-100 text-rose-800 border-rose-200",
-  "राष्ट्रिय स्वतन्त्र पार्टी": "bg-amber-100 text-amber-800 border-amber-200",
+  "राष्ट्रिय स्वतन्त्र पार्टी": "bg-blue-100 text-blue-800 border-blue-200",
   "राष्ट्रिय प्रजातन्त्र पार्टी": "bg-purple-100 text-purple-800 border-purple-200",
   "जनता समाजवादी पार्टी, नेपाल": "bg-green-100 text-green-800 border-green-200",
   "स्वतन्त्र": "bg-gray-100 text-gray-800 border-gray-200",
@@ -34,7 +34,7 @@ export function CandidateCard({ candidate, onClick, className }: CandidateCardPr
       <div className="flex items-start gap-3">
         {/* Avatar placeholder */}
         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-secondary">
-          <User className="h-6 w-6 text-muted-foreground" />
+          <img src={`https://result.election.gov.np/Images/Candidate/${candidate.CandidateID}.jpg`} className="w-100 h-100 object-cover" alt="candidate picture of face"/>
         </div>
 
         <div className="flex-1 min-w-0">
@@ -64,7 +64,7 @@ export function CandidateCard({ candidate, onClick, className }: CandidateCardPr
       <div className="mt-4 grid grid-cols-2 gap-2 text-sm">
         <div className="flex items-center gap-1.5 text-muted-foreground">
           <MapPin className="h-3.5 w-3.5" />
-          <span className="truncate">{candidate.DistrictName}</span>
+          <span className="truncate">{candidate.DistrictName} - क्षेत्र {candidate.SCConstID}</span>
         </div>
         <div className="flex items-center gap-1.5 text-muted-foreground">
           <Calendar className="h-3.5 w-3.5" />
