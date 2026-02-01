@@ -1,0 +1,165 @@
+import { useState, useMemo, useCallback } from "react";
+import { Layout } from "@/components/layout/Layout";
+import { FilterPanel } from "@/components/filters/FilterPanel";
+import { CandidateCard } from "@/components/candidates/CandidateCard";
+import { CandidateDetail } from "@/components/candidates/CandidateDetail";
+import { allCandidates } from "@/data/mockCandidates";
+import {
+  useFilteredCandidates,
+  useFilterOptions,
+} from "@/hooks/useElectionData";
+import { Candidate, FilterState } from "@/types/election";
+import { Input } from "@/components/ui/input";
+import { Search, Users } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+const ITEMS_PER_PAGE = 24;
+
+const CandidatesPage = () => {
+  const [filters, setFilters] = useState<FilterState>({
+    province: null,
+    district: null,
+    party: null,
+    qualification: null,
+    gender: null,
+    ageMin: null,
+    ageMax: null,
+  });
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const [page, setPage] = useState(1);
+  const [selectedCandidate, setSelectedCandidate] = useState<Candidate | null>(null);
+  const [detailOpen, setDetailOpen] = useState(false);
+
+  const filterOptions = useFilterOptions(allCandidates);
+  const filteredByFilters = useFilteredCandidates(allCandidates, filters);
+
+  // Apply search filter
+  const filteredCandidates = useMemo(() => {
+    if (!searchQuery.trim()) return filteredByFilters;
+    
+    const query = searchQuery.toLowerCase();
+    return filteredByFilters.filter(
+      (c) =>
+        c.CandidateName.toLowerCase().includes(query) ||
+        c.DistrictName.toLowerCase().includes(query) ||
+        c.PoliticalPartyName.toLowerCase().includes(query)
+    );
+  }, [filteredByFilters, searchQuery]);
+
+  // Paginated results
+  const paginatedCandidates = useMemo(() => {
+    const start = 0;
+    const end = page * ITEMS_PER_PAGE;
+    return filteredCandidates.slice(start, end);
+  }, [filteredCandidates, page]);
+
+  const hasMore = paginatedCandidates.length < filteredCandidates.length;
+
+  const handleCandidateClick = useCallback((candidate: Candidate) => {
+    setSelectedCandidate(candidate);
+    setDetailOpen(true);
+  }, []);
+
+  const loadMore = useCallback(() => {
+    setPage((p) => p + 1);
+  }, []);
+
+  // Reset page when filters change
+  const handleFilterChange = useCallback((newFilters: FilterState) => {
+    setFilters(newFilters);
+    setPage(1);
+  }, []);
+
+  return (
+    <Layout>
+      {/* Header */}
+      <div className="mb-6">
+        <h1 className="text-2xl md:text-3xl font-bold text-foreground font-nepali">
+          उम्मेदवार खोज्नुहोस्
+        </h1>
+        <p className="mt-1 text-muted-foreground">
+          Search and explore all candidates
+        </p>
+      </div>
+
+      {/* Search Bar */}
+      <div className="relative mb-6">
+        <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+        <Input
+          type="text"
+          placeholder="नाम, जिल्ला, वा पार्टी खोज्नुहोस्... (Search name, district, or party)"
+          value={searchQuery}
+          onChange={(e) => {
+            setSearchQuery(e.target.value);
+            setPage(1);
+          }}
+          className="pl-10 h-12 text-base bg-card"
+        />
+      </div>
+
+      {/* Filters */}
+      <div className="mb-6 p-4 bg-card rounded-xl border border-border">
+        <FilterPanel
+          filters={filters}
+          onFilterChange={handleFilterChange}
+          options={filterOptions}
+        />
+      </div>
+
+      {/* Results count */}
+      <div className="flex items-center gap-2 mb-4">
+        <Users className="h-4 w-4 text-muted-foreground" />
+        <span className="text-sm text-muted-foreground">
+          {filteredCandidates.length.toLocaleString()} उम्मेदवार फेला पर्यो
+        </span>
+      </div>
+
+      {/* Candidates Grid */}
+      {filteredCandidates.length === 0 ? (
+        <div className="text-center py-12 bg-card rounded-xl border border-border">
+          <Users className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+          <h3 className="text-lg font-medium text-foreground mb-2">
+            कुनै उम्मेदवार फेला परेन
+          </h3>
+          <p className="text-sm text-muted-foreground">
+            Please adjust your filters or search query
+          </p>
+        </div>
+      ) : (
+        <>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {paginatedCandidates.map((candidate) => (
+              <CandidateCard
+                key={candidate.CandidateID}
+                candidate={candidate}
+                onClick={() => handleCandidateClick(candidate)}
+              />
+            ))}
+          </div>
+
+          {/* Load More */}
+          {hasMore && (
+            <div className="mt-8 text-center">
+              <Button onClick={loadMore} size="lg" variant="outline">
+                थप लोड गर्नुहोस् (Load More)
+              </Button>
+              <p className="mt-2 text-sm text-muted-foreground">
+                Showing {paginatedCandidates.length} of {filteredCandidates.length}
+              </p>
+            </div>
+          )}
+        </>
+      )}
+
+      {/* Candidate Detail Modal */}
+      <CandidateDetail
+        candidate={selectedCandidate}
+        open={detailOpen}
+        onOpenChange={setDetailOpen}
+      />
+    </Layout>
+  );
+};
+
+export default CandidatesPage;

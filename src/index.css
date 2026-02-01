@@ -2,95 +2,129 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* Nepal Election Dashboard - Civic Design System
+   Clean, neutral, government-inspired palette
+   All colors in HSL format
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Core backgrounds */
+    --background: 45 30% 97%;
+    --foreground: 215 35% 15%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    /* Cards with warm cream tone */
+    --card: 45 40% 99%;
+    --card-foreground: 215 35% 15%;
 
+    /* Popovers and overlays */
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 215 35% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary - Deep Government Blue */
+    --primary: 215 55% 25%;
+    --primary-foreground: 45 30% 97%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary - Warm Neutral */
+    --secondary: 35 25% 92%;
+    --secondary-foreground: 215 35% 20%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted - Soft backgrounds */
+    --muted: 35 20% 94%;
+    --muted-foreground: 215 15% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accent - Nepal Crimson (subtle) */
+    --accent: 350 65% 50%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Success - Green for positive stats */
+    --success: 160 60% 40%;
+    --success-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Warning - Amber */
+    --warning: 40 95% 50%;
+    --warning-foreground: 215 35% 15%;
 
-    --radius: 0.5rem;
+    /* Destructive */
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
 
-    --sidebar-background: 0 0% 98%;
+    /* Borders and inputs */
+    --border: 35 20% 88%;
+    --input: 35 20% 90%;
+    --ring: 215 55% 25%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    --radius: 0.75rem;
 
-    --sidebar-primary: 240 5.9% 10%;
+    /* Chart colors - balanced political neutral palette */
+    --chart-1: 215 55% 35%;
+    --chart-2: 350 55% 55%;
+    --chart-3: 160 50% 45%;
+    --chart-4: 35 70% 55%;
+    --chart-5: 270 40% 55%;
+    --chart-6: 190 55% 45%;
+    --chart-7: 25 65% 50%;
+    --chart-8: 300 35% 50%;
 
-    --sidebar-primary-foreground: 0 0% 98%;
+    /* Sidebar */
+    --sidebar-background: 215 45% 20%;
+    --sidebar-foreground: 45 30% 95%;
+    --sidebar-primary: 45 30% 97%;
+    --sidebar-primary-foreground: 215 35% 15%;
+    --sidebar-accent: 215 40% 30%;
+    --sidebar-accent-foreground: 45 30% 95%;
+    --sidebar-border: 215 40% 25%;
+    --sidebar-ring: 215 55% 50%;
 
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Custom gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(215 55% 25%) 0%, hsl(215 45% 35%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(45 40% 99%) 0%, hsl(35 25% 96%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(350 65% 50%) 0%, hsl(350 55% 60%) 100%);
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 215 40% 10%;
+    --foreground: 45 20% 95%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 215 35% 14%;
+    --card-foreground: 45 20% 95%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 215 35% 12%;
+    --popover-foreground: 45 20% 95%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 45 50% 85%;
+    --primary-foreground: 215 40% 12%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 215 30% 20%;
+    --secondary-foreground: 45 20% 90%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 215 25% 18%;
+    --muted-foreground: 45 15% 60%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 350 60% 55%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --success: 160 55% 45%;
+    --success-foreground: 0 0% 100%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --warning: 40 90% 55%;
+    --warning-foreground: 215 35% 15%;
+
+    --destructive: 0 65% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 215 25% 22%;
+    --input: 215 25% 20%;
+    --ring: 45 50% 85%;
+
+    --sidebar-background: 215 45% 8%;
+    --sidebar-foreground: 45 30% 90%;
+    --sidebar-primary: 45 50% 85%;
+    --sidebar-primary-foreground: 215 40% 12%;
+    --sidebar-accent: 215 35% 18%;
+    --sidebar-accent-foreground: 45 30% 90%;
+    --sidebar-border: 215 30% 18%;
+    --sidebar-ring: 45 50% 70%;
   }
 }
 
@@ -100,6 +134,124 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Nepali text optimization */
+  .nepali-text {
+    font-family: 'Noto Sans Devanagari', 'Mukta', system-ui, sans-serif;
+    line-height: 1.6;
+  }
+
+  /* Large text for names */
+  .text-name {
+    @apply text-lg font-semibold tracking-tight;
+  }
+}
+
+@layer components {
+  /* Stat card variants */
+  .stat-card {
+    @apply bg-card rounded-xl border border-border p-5 shadow-sm transition-all duration-200;
+  }
+  
+  .stat-card:hover {
+    @apply shadow-md border-primary/20;
+  }
+
+  /* Filter chip styles */
+  .filter-chip {
+    @apply px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-150 cursor-pointer;
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/80;
+  }
+  
+  .filter-chip.active {
+    @apply bg-primary text-primary-foreground;
+  }
+
+  /* Candidate card */
+  .candidate-card {
+    @apply bg-card rounded-xl border border-border p-4 transition-all duration-200 cursor-pointer;
+  }
+  
+  .candidate-card:hover {
+    @apply shadow-lg border-primary/30 -translate-y-0.5;
+  }
+
+  /* Chart container */
+  .chart-container {
+    @apply bg-card rounded-xl border border-border p-5;
+  }
+
+  /* Badge variants */
+  .badge-party {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium;
+  }
+
+  /* Glass effect for overlays */
+  .glass {
+    @apply backdrop-blur-md bg-background/80;
+  }
+
+  /* Smooth scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-muted rounded-full;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-border rounded-full hover:bg-muted-foreground/30;
+  }
+}
+
+@layer utilities {
+  /* Animation utilities */
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.4s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.2s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    from { 
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to { 
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scaleIn {
+    from { 
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to { 
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Gradient text */
+  .text-gradient-primary {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-hero);
   }
 }
