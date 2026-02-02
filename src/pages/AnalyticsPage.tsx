@@ -134,7 +134,7 @@ const AnalyticsPage = () => {
   return (
     <Layout>
       {/* Header */}
-      <div className="mb-8"><img src="election_banner.png" className="mb-8" />
+      <div className="mb-8"><img src="election_banner.png" className="mb-8 w-100" />
         <h1 className="text-2xl md:text-3xl font-bold text-foreground font-nepali">
           विस्तृत विश्लेषण
         </h1>

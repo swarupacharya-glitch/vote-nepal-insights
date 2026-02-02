@@ -52,7 +52,7 @@ const Index = () => {
     <Layout>
       {/* Hero Section */}
       <div className="mb-8 animate-fade-in">
-        <img src="election_banner.png" className="mb-8" />
+        <img src="election_banner.png" className="mb-8 w-100" />
         <h1 className="text-3xl md:text-4xl font-bold text-foreground font-nepali">
           आफ्नो उम्मेदवारलाई चिन्नुहोस्
         </h1>
@@ -103,23 +103,7 @@ const Index = () => {
         />
       </div>
 
-      {/* Charts Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-        <div className="animate-slide-in-bottom" style={{ animationDelay: "0.1s" }}>
-          <PartyBarChart data={stats.byParty} />
-        </div>
-        <div className="animate-slide-in-bottom" style={{ animationDelay: "0.15s" }}>
-          <QualificationPieChart data={stats.byQualification} />
-        </div>
-        <div className="animate-slide-in-bottom" style={{ animationDelay: "0.2s" }}>
-          <GenderChart data={stats.byGender} />
-        </div>
-        <div className="animate-slide-in-bottom" style={{ animationDelay: "0.25s" }}>
-          <ProvinceChart data={stats.byProvince} />
-        </div>
-      </div>
-
-      {/* Candidate Preview */}
+            {/* Candidate Preview */}
       <div className="animate-slide-in-bottom" style={{ animationDelay: "0.3s" }}>
         <div className="flex items-center justify-between mb-4">
           <div>
@@ -164,6 +148,24 @@ const Index = () => {
         open={detailOpen}
         onOpenChange={setDetailOpen}
       />
+
+      {/* Charts Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <div className="animate-slide-in-bottom" style={{ animationDelay: "0.1s" }}>
+          <PartyBarChart data={stats.byParty} />
+        </div>
+        <div className="animate-slide-in-bottom" style={{ animationDelay: "0.15s" }}>
+          <QualificationPieChart data={stats.byQualification} />
+        </div>
+        <div className="animate-slide-in-bottom" style={{ animationDelay: "0.2s" }}>
+          <GenderChart data={stats.byGender} />
+        </div>
+        <div className="animate-slide-in-bottom" style={{ animationDelay: "0.25s" }}>
+          <ProvinceChart data={stats.byProvince} />
+        </div>
+      </div>
+
+
     </Layout>
   );
 };
