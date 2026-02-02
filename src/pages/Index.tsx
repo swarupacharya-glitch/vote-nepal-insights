@@ -52,7 +52,7 @@ const Index = () => {
     <Layout>
       {/* Hero Section */}
       <div className="mb-8 animate-fade-in">
-        <img src="election_banner.png" />
+        <img src="election_banner.png" style="margin-bottom:25px;" />
         <h1 className="text-3xl md:text-4xl font-bold text-foreground font-nepali">
           आफ्नो उम्मेदवारलाई चिन्नुहोस्
         </h1>
