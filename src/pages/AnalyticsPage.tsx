@@ -272,43 +272,6 @@ const AnalyticsPage = () => {
         </div>
 
         {/* Top Universities */}
-        <div className="chart-container">
-          <div className="mb-4">
-            <h3 className="font-semibold text-foreground">शीर्ष शैक्षिक संस्थाहरू</h3>
-            <p className="text-xs text-muted-foreground">Top institutions producing candidates</p>
-          </div>
-          <div className="h-72">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart
-                data={topUniversities}
-                layout="vertical"
-                margin={{ top: 5, right: 30, left: 40, bottom: 5 }}
-              >
-                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                <XAxis type="number" tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }} />
-                <YAxis 
-                  dataKey="name" 
-                  type="category" 
-                  tick={{ fontSize: 12, fill: "hsl(var(--foreground))" }} 
-                  width={50}
-                />
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: "hsl(var(--popover))",
-                    border: "1px solid hsl(var(--border))",
-                    borderRadius: "8px",
-                    fontSize: "12px",
-                  }}
-                  formatter={(value: number) => [`${value} उम्मेदवार`, ""]}
-                />
-                <Bar dataKey="value" fill="hsl(var(--accent))" radius={[0, 4, 4, 0]} />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-          <p className="mt-3 text-sm text-muted-foreground">
-            त्रिभुवन विश्वविद्यालय (TU) बाट सबैभन्दा धेरै उम्मेदवार आएका छन्।
-          </p>
-        </div>
       </div>
 
       {/* Key Insights Summary */}
