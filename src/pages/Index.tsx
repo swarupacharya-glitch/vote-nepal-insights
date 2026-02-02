@@ -52,7 +52,7 @@ const Index = () => {
     <Layout>
       {/* Hero Section */}
       <div className="mb-8 animate-fade-in">
-        <img src="election_banner.png" className="mb-8 w-100" />
+        <img src="election_banner.png" className="mb-8 w-full" />
         <h1 className="text-3xl md:text-4xl font-bold text-foreground font-nepali">
           आफ्नो उम्मेदवारलाई चिन्नुहोस्
         </h1>
@@ -132,7 +132,7 @@ const Index = () => {
         </div>
 
         {filteredCandidates.length > 6 && (
-          <div className="mt-6 text-center">
+          <div className="mt-6 mb-6 text-center">
             <Link to="/candidates">
               <Button size="lg">
                 सबै {filteredCandidates.length.toLocaleString()} उम्मेदवार हेर्नुहोस्
