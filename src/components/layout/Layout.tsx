@@ -15,7 +15,7 @@ export function Layout({ children }: LayoutProps) {
       <footer className="border-t border-border bg-card/50 py-6 mt-8">
         <div className="container text-center text-sm text-muted-foreground">
           <p>Nepal Election Candidates Dashboard • Data for civic awareness developed by Swikar Sharma</p>
-          <p className="mt-1 text-xs"> Disclaimer : यहाँ उपलब्ध तथ्यांकको स्रोत निर्वाचन आयोग हो   </p>
+          <p className="mt-1 text-xs"> तथ्यांकको स्रोत : निर्वाचन आयोग </p>
         </div>
       </footer>
     </div>
