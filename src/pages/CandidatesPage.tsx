@@ -133,7 +133,7 @@ const CandidatesPage = () => {
       <div className="flex items-center gap-2 mb-4">
         <Users className="h-4 w-4 text-muted-foreground" />
         <span className="text-sm text-muted-foreground">
-          {filteredCandidates.length.toLocaleString()} उम्मेदवार फेला पर्यो
+          {filteredCandidates.length.toLocaleString()} उम्मेदवार फेला पर्‍यो
         </span>
       </div>
 

@@ -111,7 +111,7 @@ const Index = () => {
               उम्मेदवारहरू
             </h2>
             <p className="text-sm text-muted-foreground">
-              {filteredCandidates.length.toLocaleString()} उम्मेदवार फेला पर्यो
+              {filteredCandidates.length.toLocaleString()} उम्मेदवार फेला पर्‍यो
             </p>
           </div>
           <Link to="/candidates">
