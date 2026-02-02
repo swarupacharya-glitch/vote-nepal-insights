@@ -15,7 +15,7 @@ export function Layout({ children }: LayoutProps) {
       <footer className="border-t border-border bg-card/50 py-6 mt-8">
         <div className="container text-center text-sm text-muted-foreground">
           <p>Nepal Election Candidates Dashboard • Data for civic awareness</p>
-          <p className="mt-1 text-xs">नेपाल निर्वाचन उम्मेदवार ड्यासबोर्ड</p>
+          <p className="mt-1 text-xs">आफ्नो उम्मेदवारलाई चिन्नुहोस् </p>
         </div>
       </footer>
     </div>
